@@ -120,7 +120,7 @@ def extract_product_details(driver, category_url):
 
         
         # Only append products with > 50% discount
-        if discount!="Not available" and float(discount.replace('%'or '', '').strip()) > 50:
+        if discount!="Not available" and float(discount.replace('%', '').strip()) > 50:
             products.append({
                 'Product Name': name,
                 'Product Price': price,
