@@ -88,7 +88,7 @@ def extract_product_details(driver, category_url):
         except:
             description = "Not available"
         try:
-            images = [img.get_attribute('src') for img in driver.find_elements(By.XPATH, '//*[@id="landingImage"]')]
+            images = [img.get_attribute('src') for img in driver.find_elements(By.CLASS_NAME, 'a-dynamic-image a-stretch-horizontal')]
             
         except:
             images = ["Not available"]
