@@ -164,8 +164,8 @@ def save_data(products, filename, file_type):
 
 # Main function
 def main():
-    email = os.getenv('number')
-    password = os.getenv('password')    
+    email = os.getenv('number')      # Amazon login email
+    password = os.getenv('password')    # Amazon login password
     
     # List of categories to scrape
     categories = [
