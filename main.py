@@ -52,96 +52,96 @@ def extract_product_details(driver, category_url):
     time.sleep(2)
     
     products = []
-    for i in range(50):
-        # Scraping the product list
-        product_list = driver.find_elements(By.XPATH, '//div[@id="p13n-asin-index-0"]/div')
-        for product in product_list:
-            try:
-                name = product.find_element(By.CLASS_NAME, '_cDEzb_p13n-sc-css-line-clamp-3_g3dy1').text
-            except:
-                name = "Not available"
-            try:
-                best_Seller_rating = product.find_element(By.XPATH, './/span[@class="zg-bdg-text"]').text.strip()              
-            except:
-                best_Seller_rating = "Not available"
-            try:
-                category_Name = product.find_element(By.XPATH, './/span[@class="_p13n-zg-nav-tree-all_style_zg-selected__1SfhQ"]').text
-                
-            except:
-                category_Name = "Not available"
-                                
-
-        # Open product page
-            try:
-                product_Link = product.find_element(By.TAG_NAME,'a').get_attribute("href")
-               
-                driver.execute_script("window.open(arguments[0]);", product_Link)
-                driver.switch_to.window(driver.window_handles[1])
-
-                time.sleep(5)
-                try:
-                    sold_Past_month = driver.find_element(By.XPATH, './/*[@id="social-proofing-faceout-title-tk_bought"]/span[1]').text
-                except:
-                    sold_Past_month = "Not  available"
-                try:
-                    description = driver.find_element(By.XPATH, './/*[@id="productDetails_techSpec_section_1"]/tbody').text
-                except:
-                    description = "Not available"
-                try:
-                    images = [img.get_attribute('src') for img in driver.find_elements(By.CLASS_NAME, 'a-dynamic-image a-stretch-horizontal')]
-                
-                except:
-                    images = ["Not available"]
-                try:
-                    ship_from = driver.find_element(By.XPATH, './/*[@id="tabular-buybox"]/div[1]/div[4]/div/span').text
-                except:
-                    ship_from = "Not available"
-                try:
-                    sold_by = driver.find_element(By.XPATH, './html/body/div[2]/div/div/div[4]/div[1]/div[3]/div/div[1]/div/div/div/form/div/div/div/div/div[4]/div/div[18]/div[1]/div[1]/div[6]/div/span/a').text
-                except:
-                    
-                    sold_by = "Not available"
-                try:   
-                    price = driver.find_element(By.XPATH, './/*[@id="corePrice_feature_div"]/div/div/span[1]/span[2]/span[2]').text
-                except:   
-                    price = "Not available"
-                try:
-                    discount = driver.find_element(By.XPATH, './/*[@id="corePriceDisplay_desktop_feature_div"]/div[1]/span[2]').text.replace("-","")
-                except:
-                    discount = "Not available"
-                
-                try:
-                    rating = driver.find_element(By.XPATH, './/*[@id="acrCustomerReviewText"]')
-                    rating = [rating.text.replace(",","").replace(" ",",")]
-                    rating = rating[0]
-
-                except:
-                    rating = "Not available"
-
+    
+    # Scraping the product list
+    product_list = driver.find_elements(By.XPATH, '//div[@class="_cDEzb_iveVideoWrapper_JJ34T has-ive-video"]')
+    for product in product_list:
+        try:
+            name = product.find_element(By.XPATH, './/div[@class="_cDEzb_p13n-sc-css-line-clamp-3_g3dy1"]').text
+        except:
+            name = "Not available"
+        try:
+            best_Seller_rating = product.find_element(By.XPATH, './/span[@class="zg-bdg-text"]').text.strip()              
+        except:
+            best_Seller_rating = "Not available"
+        try:
+            category_Name = product.find_element(By.XPATH, './/span[@class="_p13n-zg-nav-tree-all_style_zg-selected__1SfhQ"]').text
             
-                # Only append products with > 50% discount
-                if discount!="Not available" and int(discount.replace('%', '').strip()) > 50:
-                    products.append({
-                        'Product Name': name,
-                        'Product Price': price,
-                        'Sale Discount': discount,
-                        'Best Seller Rating': best_Seller_rating,
-                        'Rating': rating,
-                        'Ship From': ship_from,
-                        'Sold By': sold_by,
-                        'Product Description': description,
-                        'Number Bought in the Past Month' : sold_Past_month,
-                        'Category Name': category_Name,
-                        'Images': images
-                })
+        except:
+            category_Name = "Not available"
+                            
+
+    # Open product page
         
-            finally:    
-                    # close product page
-                driver.close()
-                driver.switch_to.window(driver.window_handles[0])
+        product_Link = product.find_element(By.TAG_NAME, 'a').get_attribute("href")
+            
+        driver.execute_script("window.open(arguments[0]);", product_Link)
+        driver.switch_to.window(driver.window_handles[1])
+
+        time.sleep(5)
+        try:
+            sold_Past_month = driver.find_element(By.XPATH, '//*[@id="social-proofing-faceout-title-tk_bought"]/span[1]').text
+        except:
+            sold_Past_month = "Not  available"
+        try:
+            description = driver.find_element(By.XPATH, '//*[@id="productDetails_techSpec_section_1"]/tbody').text
+        except:
+            description = "Not available"
+        try:
+            images = [img.get_attribute('src') for img in driver.find_elements(By.CLASS_NAME, 'a-dynamic-image a-stretch-horizontal')]
+            
+        except:
+            images = ["Not available"]
+        try:
+            ship_from = driver.find_element(By.XPATH, '//*[@id="tabular-buybox"]/div[1]/div[4]/div/span').text
+        except:
+            ship_from = "Not available"
+        try:
+            sold_by = driver.find_element(By.XPATH, '/html/body/div[2]/div/div/div[4]/div[1]/div[3]/div/div[1]/div/div/div/form/div/div/div/div/div[4]/div/div[18]/div[1]/div[1]/div[6]/div/span/a').text
+        except:
+                
+            sold_by = "Not available"
+        try:   
+            price = driver.find_element(By.XPATH, '//*[@id="corePrice_feature_div"]/div/div/span[1]/span[2]/span[2]').text
+        except:   
+            price = "Not available"
+        try:
+            discount = driver.find_element(By.XPATH, '//*[@id="corePriceDisplay_desktop_feature_div"]/div[1]/span[2]').text.replace("-","")
+        except:
+            discount = "Not available"
+            
+        try:
+            rating = driver.find_element(By.XPATH, '//*[@id="acrCustomerReviewText"]')
+            rating = [rating.text.replace(",","").replace(" ",",")]
+            rating = rating[0]
+
+        except:
+            rating = "Not available"
+
+        
+        # Only append products with > 50% discount
+        if discount!="Not available" and int(discount.replace('%', '').strip()) > 50:
+            products.append({
+                'Product Name': name,
+                'Product Price': price,
+                'Sale Discount': discount,
+                'Best Seller Rating': best_Seller_rating,
+                'Rating': rating,
+                'Ship From': ship_from,
+                'Sold By': sold_by,
+                'Product Description': description,
+                'Number Bought in the Past Month' : sold_Past_month,
+                'Category Name': category_Name,
+                'Images': images
+        })
+    
+            
+            # close product page
+        driver.close()
+        driver.switch_to.window(driver.window_handles[0])
                 
 
-                next_Page(driver)
+        next_Page(driver)
             
 
 
@@ -169,8 +169,16 @@ def main():
     
     # List of categories to scrape
     categories = [
-        "https://www.amazon.com/Best-Sellers/zgbs/electronics",
-        "https://www.amazon.com/Best-Sellers/zgbs/toys-and-games",
+        "https://www.amazon.in/gp/bestsellers/kitchen/ref=zg_bs_nav_kitchen_0",
+        "https://www.amazon.in/gp/bestsellers/shoes/ref=zg_bs_nav_shoes_0",
+        "https://www.amazon.in/gp/bestsellers/computers/ref=zg_bs_nav_computers_0",
+        "https://www.amazon.in/gp/bestsellers/toys/ref=zg_bs_toys_sm",
+        "https://www.amazon.in/gp/bestsellers/beauty/ref=zg_bs_beauty_0",
+        "https://www.amazon.in/gp/bestsellers/jewelry/ref=zg_bs_nav_jewelry_0",
+        "https://www.amazon.in/gp/bestsellers/books/ref=zg_bs_books_0",
+        "https://www.amazon.in/gp/bestsellers/dvd/ref=zg_bs_nav_dvd_0",
+        "https://www.amazon.in/gp/bestsellers/music/ref=zg_bs_nav_music_0",
+        "https://www.amazon.in/gp/bestsellers/watches/ref=zg_bs_watches_sm",
         # Add more category URLs
     ]
     
