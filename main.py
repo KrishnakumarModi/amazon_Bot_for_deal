@@ -65,7 +65,7 @@ def extract_product_details(driver, category_url):
         except:
             best_Seller_rating = "Not available"
         try:
-            category_Name = product.find_element(By.XPATH, './/span[@class="_p13n-zg-nav-tree-all_style_zg-selected__1SfhQ"]').text
+            category_Name = driver.find_element(By.XPATH, '//span[@class="_p13n-zg-nav-tree-all_style_zg-selected__1SfhQ"]').text
             
         except:
             category_Name = "Not available"
@@ -88,7 +88,7 @@ def extract_product_details(driver, category_url):
         except:
             description = "Not available"
         try:
-            images = [img.get_attribute('src') for img in driver.find_elements(By.CLASS_NAME, 'a-dynamic-image a-stretch-horizontal')]
+            images = [img.get_attribute('src') for img in driver.find_elements(By.XPATH, '//*[@id="landingImage"]')]
             
         except:
             images = ["Not available"]
@@ -97,7 +97,7 @@ def extract_product_details(driver, category_url):
         except:
             ship_from = "Not available"
         try:
-            sold_by = driver.find_element(By.XPATH, '/html/body/div[2]/div/div/div[4]/div[1]/div[3]/div/div[1]/div/div/div/form/div/div/div/div/div[4]/div/div[18]/div[1]/div[1]/div[6]/div/span/a').text
+            sold_by = driver.find_element(By.XPATH, '//span[@class="a-size-small tabular-buybox-text-message"]/a').text
         except:
                 
             sold_by = "Not available"
@@ -156,7 +156,7 @@ def save_data(products, filename, file_type):
         writer = csv.DictWriter(file, fieldnames=fieldnames)
         writer.writeheader()
         for product in products:
-            product['Images'] = ", ".join(product['Images'])
+            #product['Images'] = ", ".join(product['Images'])
             writer.writerow(product)
 
 
@@ -178,7 +178,7 @@ def main():
         "https://www.amazon.in/gp/bestsellers/books/ref=zg_bs_books_0",
         "https://www.amazon.in/gp/bestsellers/dvd/ref=zg_bs_nav_dvd_0",
         "https://www.amazon.in/gp/bestsellers/music/ref=zg_bs_nav_music_0",
-        "https://www.amazon.in/gp/bestsellers/watches/ref=zg_bs_watches_sm",
+        "https://www.amazon.in/gp/bestsellers/watches/ref=zg_bs_watches_sm"
         # Add more category URLs
     ]
     
