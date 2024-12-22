@@ -156,7 +156,7 @@ def save_data(products, filename, file_type):
         writer = csv.DictWriter(file, fieldnames=fieldnames)
         writer.writeheader()
         for product in products:
-            #product['Images'] = ", ".join(product['Images'])
+            product['Images'] = ", ".join(product['Images'])
             writer.writerow(product)
 
 
