@@ -73,7 +73,7 @@ def extract_product_details(driver, category_url):
 
     # Open product page
         
-        product_Link = product.find_element(By.TAG_NAME, 'a').get_attribute("href")
+        product_Link = product.find_element(By.LINK_TEXT, name).get_attribute("href")
             
         driver.execute_script("window.open(arguments[0]);", product_Link)
         driver.switch_to.window(driver.window_handles[1])
@@ -106,7 +106,7 @@ def extract_product_details(driver, category_url):
         except:   
             price = "Not available"
         try:
-            discount = driver.find_element(By.XPATH, '//*[@id="corePriceDisplay_desktop_feature_div"]/div[1]/span[2]').text.replace("-","")
+            discount = driver.find_element(By.XPATH, '//span[@class="a-size-large a-color-price savingPriceOverride aok-align-center reinventPriceSavingsPercentageMargin savingsPercentage"]').text.replace("-","")
         except:
             discount = "Not available"
             
@@ -120,7 +120,7 @@ def extract_product_details(driver, category_url):
 
         
         # Only append products with > 50% discount
-        if discount!="Not available" and int(discount.replace('%', '').strip()) > 50:
+        if discount!="Not available" and float(discount.replace('%'or '', '').strip()) > 50:
             products.append({
                 'Product Name': name,
                 'Product Price': price,
@@ -141,7 +141,7 @@ def extract_product_details(driver, category_url):
         driver.switch_to.window(driver.window_handles[0])
                 
 
-        next_Page(driver)
+    next_Page(driver)
             
 
 
@@ -169,7 +169,7 @@ def main():
     
     # List of categories to scrape
     categories = [
-        "https://www.amazon.in/gp/bestsellers/kitchen/ref=zg_bs_nav_kitchen_0",
+        "https://www.amazon.in/gp/bestsellers/kitchen/ref=nav_custrec_signin",
         "https://www.amazon.in/gp/bestsellers/shoes/ref=zg_bs_nav_shoes_0",
         "https://www.amazon.in/gp/bestsellers/computers/ref=zg_bs_nav_computers_0",
         "https://www.amazon.in/gp/bestsellers/toys/ref=zg_bs_toys_sm",
