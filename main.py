@@ -173,12 +173,12 @@ def main():
         "https://www.amazon.in/gp/bestsellers/shoes/ref=zg_bs_nav_shoes_0",
         "https://www.amazon.in/gp/bestsellers/computers/ref=zg_bs_nav_computers_0",
         "https://www.amazon.in/gp/bestsellers/toys/ref=zg_bs_toys_sm",
-        "https://www.amazon.in/gp/bestsellers/beauty/ref=zg_bs_beauty_0",
         "https://www.amazon.in/gp/bestsellers/jewelry/ref=zg_bs_nav_jewelry_0",
         "https://www.amazon.in/gp/bestsellers/books/ref=zg_bs_books_0",
         "https://www.amazon.in/gp/bestsellers/dvd/ref=zg_bs_nav_dvd_0",
         "https://www.amazon.in/gp/bestsellers/music/ref=zg_bs_nav_music_0",
-        "https://www.amazon.in/gp/bestsellers/watches/ref=zg_bs_watches_sm"
+        "https://www.amazon.in/gp/bestsellers/watches/ref=zg_bs_watches_sm",
+        "https://www.amazon.in/gp/bestsellers/automotive/ref=zg_bs_nav_automotive_0",
         # Add more category URLs
     ]
     
